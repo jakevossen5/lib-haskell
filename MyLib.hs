@@ -13,12 +13,8 @@ inf = 10000 -- inf estimate for infinate integrals
 square_x_test :: Double -> Double
 square_x_test x = x*x
 
-do_integral :: (Ord p, Num p) => (p -> p) -> p -> p -> p -> p
-do_integral f start end dx
-  | end <= start = 0
-  | otherwise = (height * dx) + do_integral f (start + dx) end dx
-    where
-      height = f start
+do_integral :: (Ord p, Num p, Fractional p, Enum p) => (p -> p) -> p -> p -> p -> p
+do_integral f start end dx =  (* dx) . sum . map f . takeWhile (<= end) . iterate (+ dx) $ start + dx/2
 
 -- intg f lower upper dx =
 
