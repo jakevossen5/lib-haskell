@@ -1,4 +1,6 @@
-module MyLib (someFunc) where
+module MyLib (nroot
+             , do_integral
+             ) where
 
 -- https://stackoverflow.com/questions/42708132/haskell-find-the-nth-root-of-a-float
 nroot :: (Integral a, Floating b) => a -> b -> b
@@ -15,8 +17,3 @@ square_x_test x = x*x
 
 do_integral :: (Ord p, Num p, Fractional p, Enum p) => (p -> p) -> p -> p -> p -> p
 do_integral f start end dx =  (* dx) . sum . map f . takeWhile (<= end) . iterate (+ dx) $ start + dx/2
-
--- intg f lower upper dx =
-
-someFunc :: IO ()
-someFunc = putStrLn (show (do_integral (^3) 1 5 dx))
